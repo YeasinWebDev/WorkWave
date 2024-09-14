@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.2.11",
+    "gsap": "^3.12.5",
+    "next": "14.2.11",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.11"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "postcss": "^8",
