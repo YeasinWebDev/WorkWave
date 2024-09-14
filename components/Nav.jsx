@@ -58,13 +58,13 @@ const Nav = () => {
             {/* Mobile Menu */}
             <div
                 className={`${
-                    isOpen ? 'max-h-96 opacity-100 absolute w-full md:w-[60vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
+                    isOpen ? 'max-h-96 opacity-100 absolute w-[90vw] md:w-[60vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
                 } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#14161B] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center`}
             >
                 {navList.map(item => (
                     <NavButton key={item.label} name={item.label} link={item.href} />
                 ))}
-                <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700 t">
+                <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700 ">
                     Sign In
                 </button>
             </div>
