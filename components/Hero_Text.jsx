@@ -6,7 +6,7 @@ const Hero_Text = ({ text, type }) => {
                 :
                 ' text-[6.6vw] md:text-[4vw] lg:text-[3vw] xl:text-[3.5vw]'
             } 
-         text-white font-semibold w-[90%] md:w-[80%] lg:w-[65%]  xl:w-[60%]`}>
+         text-white font-semibold w-[90%] md:w-[80%] lg:w-[65%]  xl:w-[65%]`}>
             {text}
         </h1>
     )

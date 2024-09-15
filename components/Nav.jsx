@@ -16,7 +16,7 @@ const Nav = () => {
 
     return (
         <div className="text-white py-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between fixed top-5 z-50 md:w-[80%] lg:w-[80%] xl:w-[60%] w-full">
                 <img src='https://res.cloudinary.com/dlrktntvb/image/upload/v1726371226/logo_3_dloihy.png'/>
 
                 {/* Hamburger Menu for Mobile */}
