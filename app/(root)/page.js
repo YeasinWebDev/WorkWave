@@ -1,6 +1,7 @@
 import About from "@/components/About";
 import Benefits from "@/components/Benefits";
 import Hero from "@/components/Hero";
+import Integrations from "@/components/Integrations";
 import Nav from "@/components/Nav";
 import Product from "@/components/Product";
 
@@ -13,6 +14,7 @@ export default function Home() {
         <Product/>
         <About/>
         <Benefits/>
+        <Integrations/>
       </div>
     </div>
   );

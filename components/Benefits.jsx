@@ -17,12 +17,12 @@ const Benefits = () => {
         },
         {
             logo: <LiaUmbrellaBeachSolid size={24} color='#0BA5EC' />,
-            text: 'Advanced employee self-service portal',
+            text: 'Employee self-service portal',
             para: 'Access to personal HR data is made simple for employees, bypassing HR'
         },
         {
             logo: <SiGoogleanalytics size={24} color='#0BA5EC' />,
-            text: 'HR analytics and reports in real-time.',
+            text: 'HR analytics and reports .',
             para: 'Unlock valuable insights into your workforce with our real-time HR analytics and reporting'
         }
     ]

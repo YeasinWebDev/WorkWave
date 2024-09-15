@@ -16,8 +16,8 @@ const Nav = () => {
 
     return (
         <div className="text-white py-6">
-            <div className="flex items-center justify-between fixed top-5 z-50 md:w-[80%] lg:w-[80%] xl:w-[60%] w-full">
-                <img src='https://res.cloudinary.com/dlrktntvb/image/upload/v1726371226/logo_3_dloihy.png'/>
+            <div className="flex items-center justify-between fixed top-5 z-50 md:w-[80%] lg:w-[80%] xl:w-[60%] w-full pr-10 md:pr-0">
+                <img className='rounded-xl' src='https://res.cloudinary.com/dlrktntvb/image/upload/v1726371226/logo_3_dloihy.png' />
 
                 {/* Hamburger Menu for Mobile */}
                 <div className="xl:hidden z-10">
@@ -53,17 +53,18 @@ const Nav = () => {
             </div>
 
             {/* Mobile Menu */}
-            <div
-                className={`${
-                    isOpen ? 'max-h-96 opacity-100 absolute w-[90vw] md:w-[60vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
-                } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#14161B] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-10`}
-            >
-                {navList.map(item => (
-                    <NavButton key={item.label} name={item.label} link={item.href} />
-                ))}
-                <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700">
-                    Sign In
-                </button>
+            <div className='fixed top-20 z-20'>
+                <div
+                    className={`${isOpen ? 'max-h-96 opacity-100 absolute w-[90vw] md:w-[80vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
+                        } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#14161B] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-50`}
+                >
+                    {navList.map(item => (
+                        <NavButton key={item.label} name={item.label} link={item.href} />
+                    ))}
+                    <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700">
+                        Sign In
+                    </button>
+                </div>
             </div>
         </div>
     );

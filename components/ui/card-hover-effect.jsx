@@ -36,7 +36,7 @@ export const HoverEffect = ({
                     <Card>
                         <h1 className='border-2 p-2 w-fit rounded-full border-[#0BA5EC] mb-2'>{item.logo}</h1>
                         <h2 className=' text-white font-semibold text-lg'>{item.text}</h2>
-                        <p className='text-[#9C9D9F] text-sm w-[14vw]'>{item.para}</p>
+                        <p className='text-[#9C9D9F] text-sm lg:w-[14vw] '>{item.para}</p>
                     </Card>
                 </div>
             ))}
