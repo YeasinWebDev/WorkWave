@@ -17,13 +17,10 @@ const Nav = () => {
     return (
         <div className="text-white py-6">
             <div className="flex items-center justify-between">
-                {/* Logo */}
-                <div className="text-2xl font-bold">
-                    logo
-                </div>
+                <img src='https://res.cloudinary.com/dlrktntvb/image/upload/v1726371226/logo_3_dloihy.png'/>
 
                 {/* Hamburger Menu for Mobile */}
-                <div className="xl:hidden">
+                <div className="xl:hidden z-10">
                     <button onClick={toggleMenu} className="text-white focus:outline-none">
                         <svg
                             className="w-6 h-6 transition-transform duration-300 ease-in-out transform"
@@ -43,14 +40,14 @@ const Nav = () => {
                 </div>
 
                 {/* Navigation Links for larger screens */}
-                <div className="hidden xl:flex items-center bg-[#14161B] px-8 py-3 gap-8 rounded-full transition-all duration-500 ease-in-out">
+                <div className="hidden xl:flex items-center bg-[#14161B] px-8 py-3 gap-8 rounded-full transition-all duration-500 ease-in-out z-10">
                     {navList.map(item => (
                         <NavButton key={item.label} name={item.label} link={item.href} />
                     ))}
                 </div>
 
                 {/* Sign In Button */}
-                <button className="hidden xl:block bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700 transition-all duration-500 ease-in-out">
+                <button className="hidden xl:block bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700 transition-all duration-500 ease-in-out z-10">
                     Sign In
                 </button>
             </div>
@@ -59,12 +56,12 @@ const Nav = () => {
             <div
                 className={`${
                     isOpen ? 'max-h-96 opacity-100 absolute w-[90vw] md:w-[60vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
-                } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#14161B] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center`}
+                } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#14161B] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-10`}
             >
                 {navList.map(item => (
                     <NavButton key={item.label} name={item.label} link={item.href} />
                 ))}
-                <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700 ">
+                <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700">
                     Sign In
                 </button>
             </div>
