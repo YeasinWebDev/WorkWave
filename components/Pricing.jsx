@@ -76,7 +76,7 @@ const Pricing = () => {
                         <div
                             ref={el => cardRefs.current[planIndex] = el}
                             key={planIndex}
-                            className={`p-6 rounded-lg w-[19vw] ${plan.name === 'Pro' ? 'border-2 border-[#0BA5EC] text-white bg-[#142531]' : plan.name === 'Enterprise' ? 'bg-[#0BA5EC] text-white' : 'bg-[#142531] text-white'}`}
+                            className={`p-6 rounded-2xl w-[19vw] ${plan.name === 'Pro' ? 'border-2 border-[#0BA5EC] text-white bg-[#142531]' : plan.name === 'Enterprise' ? 'bg-[#0BA5EC] text-white' : 'bg-[#142531] text-white'}`}
                         >
                             <h3 className={`text-xl font-semibold ${plan.name === 'Basic' ? 'text-[#A0A7AC]' : 'text-[#2563EB]'}`}>
                                 {plan.name}
