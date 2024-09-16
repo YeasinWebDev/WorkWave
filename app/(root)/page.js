@@ -5,6 +5,7 @@ import Integrations from "@/components/Integrations";
 import Nav from "@/components/Nav";
 import Pricing from "@/components/Pricing";
 import Product from "@/components/Product";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Benefits/>
         <Integrations/>
         <Pricing/>
+        <Testimonials/>
       </div>
     </div>
   );
