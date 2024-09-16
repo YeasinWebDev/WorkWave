@@ -56,7 +56,7 @@ const Nav = () => {
             <div className='fixed top-20 z-20'>
                 <div
                     className={`${isOpen ? 'max-h-96 opacity-100 absolute w-[90vw] md:w-[80vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
-                        } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#14161B] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-50`}
+                        } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#0E192D] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-50`}
                 >
                     {navList.map(item => (
                         <NavButton key={item.label} name={item.label} link={item.href} />
