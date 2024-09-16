@@ -3,6 +3,7 @@ import Benefits from "@/components/Benefits";
 import Hero from "@/components/Hero";
 import Integrations from "@/components/Integrations";
 import Nav from "@/components/Nav";
+import Pricing from "@/components/Pricing";
 import Product from "@/components/Product";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         <About/>
         <Benefits/>
         <Integrations/>
+        <Pricing/>
       </div>
     </div>
   );
