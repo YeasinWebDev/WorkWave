@@ -1,4 +1,5 @@
 import About from "@/components/About";
+import AccordionCom from "@/components/AccordionCom";
 import Benefits from "@/components/Benefits";
 import Hero from "@/components/Hero";
 import Integrations from "@/components/Integrations";
@@ -19,6 +20,7 @@ export default function Home() {
         <Integrations/>
         <Pricing/>
         <Testimonials/>
+        <AccordionCom/>
       </div>
     </div>
   );
