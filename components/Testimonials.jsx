@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Text from './Text'
 import Hero_Text from './Hero_Text'
 import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Testimonials = () => {
 
@@ -56,31 +57,75 @@ const Testimonials = () => {
       "personImage": 'https://res.cloudinary.com/dlrktntvb/image/upload/v1726494163/AdobeStock_759770325_Preview_ymqmad.png'
     }
   ];
-  
+
 
   const [currentReview, setCurrentReview] = useState(reviews[0]);
 
-  useEffect(()=>{
-    gsap.fromTo(".review",{
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo(".review", {
       y: 50,
       opacity: 0,
       duration: 1,
-    },{
+    }, {
       y: 0,
       opacity: 1,
       duration: 1,
-      ease:'power1.inOut',
+      ease: 'power1.inOut',
+      scrollTrigger: {
+        trigger: '.review',
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse",
+    }
     })
-  },[currentReview])
+  }, [currentReview])
 
-  // State to track the currently selected review
-  
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.fromTo('.heroTextofTes',
+      { y: 100, opacity: 0 },
+      {
+          y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+          scrollTrigger: {
+              trigger: '.heroTextofTes',
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse",
+          }
+      }
+  );
+
+  gsap.utils.toArray('.review-img').forEach((img, index) => {
+    gsap.fromTo(img, {
+      y: 100,
+      opacity: 0,
+    }, {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power1.out',
+      scrollTrigger: {
+        trigger: img,
+        start: "top 80%",
+        end: "bottom 10%",
+        
+        toggleActions: "play none none reverse",
+      }
+    });
+  });
+  }, [])
+
 
   return (
-    <div className='mt-20 py-20 flex items-center flex-col bg-[#14161B] rounded-xl gap-3'>
-      {/* Display selected review */}
+    <div id='testimonials' className='mt-20 py-20 flex items-center flex-col bg-[#14161B] rounded-xl gap-3'>
+      
       <Text text={'Testimonials'} />
-      <Hero_Text type='test' text='Hear from our users' />
+
+      <div className='flex items-center justify-center w-full heroTextofTes'>
+        <Hero_Text type='test' text='Hear from our users' />
+      </div>
 
       <div className="review text-white text-center bg-[#111317] py-10 rounded-2xl px-10 lg:w-[70%] w-[90%] mx-auto">
         <div className='flex items-center justify-center py-3'>
@@ -95,11 +140,11 @@ const Testimonials = () => {
       {/* Person images */}
       <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
         {reviews.map((review, index) => (
-          <img
+            <img
             key={index}
             src={review.personImage}
             alt={review.personName}
-            className={`w-40 h-40 object-cover rounded-2xl cursor-pointer border-8   ${currentReview.personName === review.personName ? 'border-[#0b709e]' : 'border-[#2A2D33]'}`}
+            className={` w-40 h-40 object-cover review-img rounded-2xl cursor-pointer border-8 ${currentReview.personName === review.personName ? 'border-[#0b709e]' : 'border-[#2A2D33]'}`}
             onClick={() => setCurrentReview(review)}
           />
         ))}

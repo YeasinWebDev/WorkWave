@@ -5,11 +5,12 @@
 body {
   font-family: var(--font-roboto), sans-serif;
 }
-html, body {
+html,
+body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-margin-top: 10vh
 }
-
-
 
 /* for nav button */
 .nav-button {
@@ -23,15 +24,11 @@ html, body {
   color: inherit;
   display: inline-block;
   position: relative;
-  color: #929395;
   font-weight: 600;
 }
 
-.button-link:hover{
-  color: #0BA5EC;
-}
-
-.name, .alt-name {
+.name,
+.alt-name {
   display: block;
   font-size: 16px;
   transition: transform 0.4s ease;
@@ -50,8 +47,6 @@ html, body {
 .nav-button:hover .name {
   transform: translateY(-100%);
 }
-
-
 
 /*  tabs */
 .no-visible-scrollbar {

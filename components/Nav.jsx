@@ -1,22 +1,38 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavButton from './NavButton';
+import gsap from 'gsap';
 
 const Nav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navList = [
-        { label: 'About', href: '/about' },
-        { label: 'Benefits', href: '/benefits' },
-        { label: 'Integrations', href: '/integrations' },
-        { label: 'Pricing', href: '/pricing' },
-        { label: 'Testimonials', href: '/testimonials' }
+        { label: 'About', href: '#about' },
+        { label: 'Benefits', href: '#benefits' },
+        { label: 'Integrations', href: '#integrations' },
+        { label: 'Pricing', href: '#pricing' },
+        { label: 'Testimonials', href: '#testimonials' }
     ];
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    useEffect(() =>{
+        gsap.fromTo('.nav',{
+            duration: 1.3,
+            opacity: 0,
+            y: -20,
+            ease: 'power2.inOut',
+        },{
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            ease: 'power2.inOut',
+        })
+
+    },[])
+
     return (
-        <div className="text-white py-6">
-            <div className="flex items-center justify-between fixed top-5 z-50 md:w-[80%] lg:w-[80%] xl:w-[60%] w-full pr-10 md:pr-0">
+        <div className=" text-white py-6">
+            <div className=" nav flex items-center justify-between fixed top-5 z-50 md:w-[80%] lg:w-[80%] xl:w-[60%] w-full pr-10 md:pr-0">
                 <img className='rounded-xl' src='https://res.cloudinary.com/dlrktntvb/image/upload/v1726371226/logo_3_dloihy.png' />
 
                 {/* Hamburger Menu for Mobile */}
@@ -40,15 +56,15 @@ const Nav = () => {
                 </div>
 
                 {/* Navigation Links for larger screens */}
-                <div className="hidden xl:flex items-center bg-[#14161B] px-8 py-3 gap-8 rounded-full transition-all duration-500 ease-in-out z-10">
+                <div className="hidden xl:flex items-center bg-[#14161B] px-8 py-3 gap-8 rounded-full transition-all text-[] duration-500 ease-in-out z-10 text-[#929395]">
                     {navList.map(item => (
                         <NavButton key={item.label} name={item.label} link={item.href} />
                     ))}
                 </div>
 
                 {/* Sign In Button */}
-                <button className="hidden xl:block bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700 transition-all duration-500 ease-in-out z-10">
-                    Sign In
+                <button className="hidden xl:block bg-blue-600 text-white py-3  px-5 rounded-full text-[16px] hover:bg-blue-700 transition-all duration-500 ease-in-out z-10">
+                Sign In
                 </button>
             </div>
 
@@ -56,7 +72,7 @@ const Nav = () => {
             <div className='fixed top-20 z-20'>
                 <div
                     className={`${isOpen ? 'max-h-96 opacity-100 absolute w-[90vw] md:w-[80vw] translate-y-0' : 'max-h-0 opacity-0 absolute w-full md:w-[60vw] -translate-y-full'
-                        } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#0E192D] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-50`}
+                        } overflow-hidden transition-all duration-500 ease-in-out xl:hidden bg-[#0E192D] px-8 py-3 mt-4 gap-4 rounded-lg flex flex-col items-center z-50 text-[#929395]`}
                 >
                     {navList.map(item => (
                         <NavButton key={item.label} name={item.label} link={item.href} />
@@ -71,3 +87,4 @@ const Nav = () => {
 };
 
 export default Nav;
+

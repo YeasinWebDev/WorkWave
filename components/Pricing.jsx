@@ -4,6 +4,7 @@ import Text from './Text'
 import Hero_para from './Hero_para'
 import { HiCheck } from "react-icons/hi";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Pricing = () => {
     const [selectedTab, setSelectedTab] = useState('Annual');
@@ -34,24 +35,66 @@ const Pricing = () => {
 
     const activePlans = prices.find(price => price.type === selectedTab)?.plans || [];
 
-    
+
     // Animation trigger
     useEffect(() => {
         if (cardRefs.current.length > 0) {
-            gsap.fromTo(cardRefs.current, 
-                { y: 100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2 }
+            gsap.fromTo(cardRefs.current,
+                { y: 100, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2,
+                    scrollTrigger: {
+                        trigger: cardRefs.current,
+                        start: "top 90%", 
+                        end: "bottom 10%",
+                        toggleActions: "play none none reverse",
+                    }
+                }
             );
         }
     }, [activePlans]);
 
+
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animating the title and description
+        gsap.fromTo('.heroText',
+            { y: 100, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.heroText',
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse",
+                }
+            }
+        );
+
+        gsap.fromTo('.heroPara',
+            { y: 100, opacity: 0 },
+            {
+                y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.heroPara',
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse",
+                }
+            }
+        );
+    }, []);
+
     return (
-        <div className='bg-[#071925] mt-20 py-10 flex items-center justify-center flex-col rounded-3xl overflow-hidden'>
+        <div id='pricing' className='bg-[#071925] mt-20 py-10 flex items-center justify-center flex-col rounded-3xl overflow-hidden'>
             <Text text='Pricing' />
-            <h1 className='text-[5vw] md:text-[3vw] lg:text-[2vw] xl:text-[2.2vw] text-center text-white font-semibold w-[90%] md:w-[80%] lg:w-[50%] xl:w-[40%] pt-10 leading-[3rem]'>
+            <h1 className='text-[5vw] md:text-[3vw] lg:text-[2vw] xl:text-[2.2vw] text-center text-white font-semibold w-[90%] md:w-[80%] lg:w-[50%] xl:w-[40%] pt-10 leading-[3rem] heroText'>
                 Choose the right plan for your business
             </h1>
-            <Hero_para type='Pricing' text='Whether you’re a small startup or a large enterprise, our plans scale to meet your HR and payroll needs.' />
+            <div className='flex items-center justify-center heroPara'>
+                <Hero_para type='Pricing' text='Whether you’re a small startup or a large enterprise, our plans scale to meet your HR and payroll needs.' />
+            </div>
 
             <div className='w-full mt-10'>
                 {/* Tabs */}
