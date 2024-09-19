@@ -12,7 +12,7 @@ import Testimonials from "@/components/Testimonials";
 export default function Home() {
   return (
     <div className="bg-[#07090F] min-h-screen w-full pb-10">
-      <div className="md:w-[80%] lg:w-[80%] xl:w-[60%] w-full px-4 md:px-0  mx-auto">
+      <div className="md:w-[80%] lg:w-[80%] xl:w-[60%] w-full pl-2 md:px-0  mx-auto">
         <Nav />
         <Hero/>
         <Product/>

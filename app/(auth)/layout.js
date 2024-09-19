@@ -35,10 +35,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`${roboto.variable} antialiased`}>
-        <Provider>
-          {children}
-          <Toaster />
-        </Provider>
+        <Provider> {children} <Toaster/></Provider>
       </body>
     </html>
   );
