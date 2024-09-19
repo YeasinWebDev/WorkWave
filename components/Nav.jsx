@@ -58,8 +58,8 @@ const Nav = () => {
                 />
 
                 {/* Hamburger Menu for Mobile */}
-                <div className="xl:hidden z-10">
-                    <button onClick={toggleMenu} className="text-white focus:outline-none">
+                <div className="xl:hidden z-10 w-full flex justify-end">
+                    <button onClick={toggleMenu} className="text-white focus:outline-none ">
                         <div className="btn btn-circle bg-transparent border-none text-white">
                             {/* Show Hamburger icon when menu is closed */}
                             {!isOpen && (
@@ -101,11 +101,11 @@ const Nav = () => {
                         <div className='hidden xl:block bg-[#14161B] text-white pt-4 pb-2 px-5 rounded-full text-[16px] hover:bg-[#14161B] transition-all duration-500 ease-in-out z-10'>
                             <NavButton key={'dashboard'} name={"Dashboard"} link={'/dashboard'} />
                         </div>
-                        <div className="relative">
+                        <div className="relative hidden xl:block">
                             <img
                                 onClick={toggleDropdown}
                                 className="rounded-full w-12 h-12 cursor-pointer object-cover"
-                                src={user?.imgUrl || 'https://via.placeholder.com/150'} 
+                                src={user?.imgUrl || 'https://via.placeholder.com/150'}
                                 alt="User profile"
                             />
 
@@ -142,11 +142,24 @@ const Nav = () => {
                     {navList.map(item => (
                         <NavButton key={item.label} name={item.label} link={item.href} />
                     ))}
-                    <Link href="/signIn">
-                        <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700">
-                            Sign In
-                        </button>
-                    </Link>
+                    {user ?
+                        <div className='flex flex-col items-center'>
+                            <div className='text-[16px] transition-all duration-500 ease-in-out z-10'>
+                                <NavButton key={'dashboard'} name={"Dashboard"} link={'/dashboard'} />
+                            </div>
+                            <button
+                                onClick={handleLogout}
+                                className="mt-3 w-full bg-[#1D4ED8] text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                                Log Out
+                            </button>
+                        </div>
+                        :
+                        <Link href="/signIn">
+                            <button className="bg-blue-500 text-white px-6 py-2 rounded-full text-[16px] hover:bg-blue-700">
+                                Sign In
+                            </button>
+                        </Link>}
+
                 </div>
             </div>
         </div>
