@@ -1,7 +1,7 @@
 "use client";
 import { Roboto } from "next/font/google";
 import Lenis from "@studio-freight/lenis";
-import "../globals.css";
+import "./globals.css";
 import { useEffect } from "react";
 import Provider from "@/components/Provider";
 import { Toaster } from "react-hot-toast";
