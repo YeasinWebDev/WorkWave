@@ -28,7 +28,6 @@ export async function POST(req) {
     };
 
     const db = await connectdb();
-    
     if (!db)
       return NextResponse.json({ massage: "Database connection failed" });
 
