@@ -29,7 +29,7 @@ const Payments = () => {
   }, []);
 
   const handleProcessPayroll = async (payroll) => {
-    console.log(payroll)
+    
     try {
       const payment ={
         paymentBy: session?.user?.email,
