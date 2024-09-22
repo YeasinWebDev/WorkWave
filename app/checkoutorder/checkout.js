@@ -12,19 +12,13 @@ export const checkoutOrder = async(payment) =>{
                     currency: 'BDT',
                     product_data: {
                         name: payment.name,
-                        images:[payment.img]
                     },
                     unit_amount: payment.salary * 100,
                 },
                 quantity: 1,
             }],
             metadata:{
-                paymentBy: payment.paymentBy,       
-                name: payment.name,                
-                email: payment.email,              
-                img: payment.img,                  
-                salary: payment.salary,            
-                payrollDate: payment.payrollDate,
+                payment: JSON.stringify(payment)
             },
             mode:'payment',
             success_url: `${liveUrl}/dashboard/payments`,
