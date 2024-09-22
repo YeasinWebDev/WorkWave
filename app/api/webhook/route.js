@@ -11,10 +11,8 @@ export async function POST(req) {
   try {
     event = stripe.webhooks.constructEvent(body, signature, endpointSecret);
   } catch (error) {
-
     console.log(`❌ Error message: ${error}`);
     return new Response(`Webhook Error: ${error}`, { status: 400 });
-    
   }
 
   const eventType = event.type;
@@ -30,6 +28,7 @@ export async function POST(req) {
     };
 
     const db = await connectdb();
+    
     if (!db)
       return NextResponse.json({ massage: "Database connection failed" });
 
