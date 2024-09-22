@@ -11,8 +11,8 @@ export async function POST(req) {
   try {
     event = stripe.webhooks.constructEvent(body, signature, endpointSecret);
   } catch (error) {
-    console.log(`❌ Error message: ${err.message}`);
-    return new Response(`Webhook Error: ${err.message}`, { status: 200 });
+    console.log(`❌ Error message: ${error}`);
+    return new Response(`Webhook Error: ${error}`, { status: 200 });
   }
 
   const eventType = event.type;
