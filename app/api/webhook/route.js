@@ -1,4 +1,5 @@
 import { connectdb } from "@/lib/connectdb";
+import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 
 export async function POST(req) {
