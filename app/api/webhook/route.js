@@ -23,29 +23,42 @@ export async function POST(req) {
   if (eventType === "checkout.session.completed") {
     const { id, amount_total, metadata } = event.data.object;
 
-    const payment = {
+    // Parse the `metadata.payment` string into an object
+    let payment;
+    try {
+      payment = JSON.parse(metadata.payment);
+    } catch (parseError) {
+      console.error(`Error parsing payment metadata: ${parseError}`);
+      return new Response(`Invalid payment metadata: ${parseError}`, { status: 400 });
+    }
+
+    const paymentDetails = {
       sessionId: id,
       amount: amount_total,
-      payment: metadata.payment,
+      payment: payment, // parsed payment object
       createdAt: new Date(),
     };
 
+    // Connect to the database
     const db = await connectdb();
-    if (!db)
-      return NextResponse.json({ massage: "Database connection failed" });
+    if (!db) return NextResponse.json({ message: "Database connection failed" });
 
-    const userCollection = await db.collection('users');
+    const userCollection = await db.collection("users");
     const paymentCollection = await db.collection("payment");
 
-    const currentPayrollDate = parseISO(payment.payment.nextPayrollDate);
+    // Parse the `nextPayrollDate` from the payment object
+    const currentPayrollDate = parseISO(payment.payrollDate);
     const nextPayrollDate = addMonths(currentPayrollDate, 1);
     const formattedNextPayrollDate = nextPayrollDate.toISOString().slice(0, 10);
 
+    // Update user data with new status and next payroll date
     const update = await userCollection.updateOne(
-      { email: payment.payment.email },
+      { email: payment.email },
       { $set: { status: "complete", nextPayrollDate: formattedNextPayrollDate } }
     );
-    const newPayment = await paymentCollection.insertOne(payment);
+
+    // Insert the new payment into the payment collection
+    const newPayment = await paymentCollection.insertOne(paymentDetails);
 
     return NextResponse.json({ message: "OK", newPayment });
   }
