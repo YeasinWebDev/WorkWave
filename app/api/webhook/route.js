@@ -1,6 +1,8 @@
 import { connectdb } from "@/lib/connectdb";
 import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
+import { addMonths, parseISO } from "date-fns";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
   const body = await req.text();
@@ -32,7 +34,17 @@ export async function POST(req) {
     if (!db)
       return NextResponse.json({ massage: "Database connection failed" });
 
+    const userCollection = await db.collection('users');
     const paymentCollection = await db.collection("payment");
+
+    const currentPayrollDate = parseISO(payment.payment.nextPayrollDate);
+    const nextPayrollDate = addMonths(currentPayrollDate, 1);
+    const formattedNextPayrollDate = nextPayrollDate.toISOString().slice(0, 10);
+
+    const update = await userCollection.updateOne(
+      { email: payment.payment.email },
+      { $set: { status: "complete", nextPayrollDate: formattedNextPayrollDate } }
+    );
     const newPayment = await paymentCollection.insertOne(payment);
 
     return NextResponse.json({ message: "OK", newPayment });
