@@ -5,19 +5,41 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
 import { checkoutOrder } from '@/app/checkoutorder/checkout';
+import { format, isEqual, isAfter, parseISO, isBefore } from 'date-fns';
 
 const Payments = () => {
   const [payrolls, setPayrolls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {data:session} = useSession()
-  console.log(session)
+
 
   useEffect(() => {
     const fetchPayrolls = async () => {
       try {
         const response = await axios.get('/api/employee/allemployee'); 
-        setPayrolls(response.data);
+        let payrollData = response.data
+
+        // update status
+        const currentDate = new Date()
+        
+        const updatedpayroll = await Promise.all(
+          payrollData.map(async (payroll) => {
+            const payrollDate = parseISO(payroll.nextPayrollDate)
+
+            if((isBefore(payrollDate, currentDate) || isEqual(payrollDate, currentDate)) && payroll.status === 'complete'){
+              console.log('inside')
+              await axios.post('/api/employee/updatePayrollStatus',{
+                email: payroll.email,
+                status: 'pending'
+              })
+              payroll.status = 'Pending'; 
+            }
+
+            return payroll
+          })
+        )
+        setPayrolls(updatedpayroll)
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch payroll data.');
@@ -48,6 +70,14 @@ const Payments = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
+
+  const isPayrollDateEligible = (date) =>{
+    const currentDate = new Date();
+    const payrollDate = parseISO(date);
+    
+    return isEqual(currentDate, payrollDate) || isBefore(payrollDate,currentDate );
+  }
+
   return (
     <div className=" py-20 flex items-center flex-col rounded-xl gap-3">
       <h1 className="text-2xl font-bold text-white">Payments</h1>
@@ -77,8 +107,9 @@ const Payments = () => {
                 <td>
                   <button
                     onClick={() => handleProcessPayroll(payroll)}
-                    disabled={payroll.status !== 'Pending'}
-                    className={`py-1 px-3 rounded ${payroll.status === 'Pending' ? 'bg-blue-500 text-white' : 'bg-gray-400 text-gray-200'}`}
+                    disabled={!payroll.status === 'Pending'}
+                    className={`py-1 px-3 rounded ${ payroll.status === 'Pending'
+                      ? 'bg-blue-500 text-white' : 'bg-gray-400 text-gray-200'}`}
                   >
                     Process Payroll
                   </button>
