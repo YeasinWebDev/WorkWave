@@ -38,14 +38,15 @@ const Pricing = () => {
 
     // Animation trigger
     useEffect(() => {
-        if (cardRefs.current.length > 0) {
+        const pricingElement = document.querySelector('#pricing');
+        if (cardRefs.current.length > 0 && pricingElement) {
             gsap.fromTo(cardRefs.current,
                 { y: 100, opacity: 0 },
                 {
                     y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', stagger: 0.2,
                     scrollTrigger: {
                         trigger: cardRefs.current,
-                        start: "top 90%", 
+                        start: "top 90%",
                         end: "bottom 10%",
                         toggleActions: "play none none reverse",
                     }
@@ -56,34 +57,42 @@ const Pricing = () => {
 
 
     useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
 
-        // Animating the title and description
-        gsap.fromTo('.heroText',
-            { y: 100, opacity: 0 },
-            {
-                y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.heroText',
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse",
-                }
-            }
-        );
+        const pricingElement = document.querySelector('#pricing');
+        const animation = () => {
+            gsap.registerPlugin(ScrollTrigger);
 
-        gsap.fromTo('.heroPara',
-            { y: 100, opacity: 0 },
-            {
-                y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.heroPara',
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse",
+            // Animating the title and description
+            gsap.fromTo('.heroText',
+                { y: 100, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.heroText',
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse",
+                    }
                 }
-            }
-        );
+            );
+
+            gsap.fromTo('.heroPara',
+                { y: 100, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.heroPara',
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse",
+                    }
+                }
+            );
+        }
+
+        if (pricingElement) {
+            animation();
+        }
     }, []);
 
     return (

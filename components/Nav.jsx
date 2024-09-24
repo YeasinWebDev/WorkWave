@@ -27,24 +27,18 @@ const Nav = () => {
     }
 
     const toggleMenu = () => setIsOpen(!isOpen);
-    const toggleDropdown = () => setShowDropdown(!showDropdown); // Toggle dropdown on image click
+    const toggleDropdown = () => setShowDropdown(!showDropdown); 
 
     useEffect(() => {
-        gsap.fromTo('.nav', {
-            duration: 1.3,
-            opacity: 0,
-            y: -20,
-            ease: 'power2.inOut',
-        }, {
-            duration: 1,
-            opacity: 1,
-            y: 0,
-            ease: 'power2.inOut',
-        });
-
+        const navElement = document.querySelector('.nav');
+        if (navElement) {
+            gsap.fromTo(navElement, 
+                { duration: 1.3, opacity: 0, y: -20, ease: 'power2.inOut' }, 
+                { duration: 1, opacity: 1, y: 0, ease: 'power2.inOut' }
+            );
+        }
     }, []);
 
-    console.log(user)
 
     return (
         <div className="text-white py-6">

@@ -62,65 +62,76 @@ const Testimonials = () => {
   const [currentReview, setCurrentReview] = useState(reviews[0]);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.fromTo(".review", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-    }, {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      ease: 'power1.inOut',
-      scrollTrigger: {
-        trigger: '.review',
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse",
+    const testimonialselement = document.getElementById('testimonials')
+    if (testimonialselement) {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.fromTo(".review", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+      }, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power1.inOut',
+        scrollTrigger: {
+          trigger: '.review',
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+        }
+      })
     }
-    })
   }, [currentReview])
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.fromTo('.heroTextofTes',
-      { y: 100, opacity: 0 },
-      {
+
+    const testimonialselement = document.getElementById('testimonials')
+    const animation = () => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.fromTo('.heroTextofTes',
+        { y: 100, opacity: 0 },
+        {
           y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
           scrollTrigger: {
-              trigger: '.heroTextofTes',
-              start: "top 80%",
-              end: "bottom 20%",
-              toggleActions: "play none none reverse",
+            trigger: '.heroTextofTes',
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
           }
-      }
-  );
+        }
+      );
 
-  gsap.utils.toArray('.review-img').forEach((img, index) => {
-    gsap.fromTo(img, {
-      y: 100,
-      opacity: 0,
-    }, {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      stagger: 0.2,
-      ease: 'power1.out',
-      scrollTrigger: {
-        trigger: img,
-        start: "top 80%",
-        end: "bottom 10%",
-        
-        toggleActions: "play none none reverse",
-      }
-    });
-  });
+      gsap.utils.toArray('.review-img').forEach((img, index) => {
+        gsap.fromTo(img, {
+          y: 100,
+          opacity: 0,
+        }, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: 'power1.out',
+          scrollTrigger: {
+            trigger: img,
+            start: "top 80%",
+            end: "bottom 10%",
+
+            toggleActions: "play none none reverse",
+          }
+        });
+      });
+    }
+
+    if(testimonialselement) {
+      animation()
+    }
   }, [])
 
 
   return (
     <div id='testimonials' className='mt-20 py-20 flex items-center flex-col bg-[#14161B] rounded-xl gap-3'>
-      
+
       <Text text={'Testimonials'} />
 
       <div className='flex items-center justify-center w-full heroTextofTes'>
@@ -140,7 +151,7 @@ const Testimonials = () => {
       {/* Person images */}
       <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
         {reviews.map((review, index) => (
-            <img
+          <img
             key={index}
             src={review.personImage}
             alt={review.personName}

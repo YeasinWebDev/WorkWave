@@ -1,6 +1,6 @@
 "use client";
 
-import Provider from "@/components/Provider"; // Ensuring the SessionProvider is imported here
+import Provider from "@/components/Provider"; 
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { IoMdMenu } from "react-icons/io";

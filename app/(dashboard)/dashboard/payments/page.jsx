@@ -107,9 +107,9 @@ const Payments = () => {
                 <td>
                   <button
                     onClick={() => handleProcessPayroll(payroll)}
-                    disabled={!payroll.status === 'Pending'}
+                    disabled={payroll.status !== 'Pending'}
                     className={`py-1 px-3 rounded ${ payroll.status === 'Pending'
-                      ? 'bg-blue-500 text-white' : 'bg-gray-400 text-gray-200'}`}
+                      ? 'bg-blue-500 text-white' : 'bg-gray-600 text-gray-400'}`}
                   >
                     Process Payroll
                   </button>

@@ -70,7 +70,7 @@ const People = () => {
             className="select select-bordered w-full max-w-xs bg-transparent"
           >
             <option value="" className='bg-black text-white'>Sort by Depertment</option>
-            {employTypeOrder.map(e=>(<option value={e} className='bg-black text-white'>{e}</option>))}
+            {employTypeOrder.map((e,i)=>(<option key={i} value={e} className='bg-black text-white'>{e}</option>))}
           </select>
         </div>
 

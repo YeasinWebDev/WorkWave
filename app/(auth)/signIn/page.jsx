@@ -2,33 +2,54 @@
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    
+    if (status === 'authenticated') {
+      router.push('/');
+    }
+  }, [status, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log({ email, password });
+    // Basic validation
+    if (!email || !password) {
+      toast.error('Please enter your email and password.');
+      return;
+    }
+
+    setLoading(true);
+
     const res = await signIn('credentials', {
-      redirect: false, 
+      redirect: false,
       email: email,
       password: password,
     });
 
-    if (res.ok) {
+    setLoading(false); // Reset loading state
+
+    if (res?.ok) {
+      toast.success('Sign In Successfully');
       router.push('/');
-      toast.success('Sign In Successfully ')
+      window.location.reload()
+    } else {
+      toast.error(res?.error || 'Sign In failed. Please check your credentials.');
     }
   };
-  
-  if(status === 'authenticated'){
-    router.push('/');
+
+  // Return loading state initially
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Prevent hydration error
   }
 
   return (
@@ -45,6 +66,7 @@ const SignIn = () => {
               placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
+              disabled={loading} // Disable input while loading
             />
           </div>
 
@@ -56,15 +78,18 @@ const SignIn = () => {
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
+              disabled={loading} // Disable input while loading
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-md"
+            className={`w-full py-3 ${loading ? 'bg-gray-600' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold rounded-md`}
+            disabled={loading} // Disable button while loading
           >
-            Sign In
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
+          
           <p className="text-white flex items-center justify-center">
             Don't have an account?
             <Link className="mx-2 font-semibold cursor-pointer" href={'/signUp'}>
