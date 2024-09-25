@@ -1,4 +1,5 @@
 'use client';
+import Loader from '@/components/Loader';
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -49,7 +50,7 @@ const SignIn = () => {
 
   // Return loading state initially
   if (status === 'loading') {
-    return <div>Loading...</div>; // Prevent hydration error
+    return <Loader/>
   }
 
   return (
