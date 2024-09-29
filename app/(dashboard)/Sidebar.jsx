@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { HiOutlineViewGrid } from 'react-icons/hi';
 import { IoMdPeople } from 'react-icons/io';
-import { TbReportAnalytics } from 'react-icons/tb';
+import { GrCompliance } from "react-icons/gr";
 import { MdOutlinePayment, MdLogout } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Loader from "@/components/Loader";
@@ -32,7 +32,7 @@ function Sidebar() {
     const isActive = (link) => activeLink === link;
 
     return (
-        <div className='z-10 md:fixed flex flex-col overflow-x-hidden bg-[#07090F] w-64 px-2 py-4 absolute inset-y-0 left-0 transform border-r-[1px] border-gray-500'>
+        <div className='z-10 md:fixed flex flex-col overflow-x-hidden bg-[#07090F] w-64 px-2 py-4 absolute inset-y-0 left-0 transform border-r-2 border-[#1e1f28]'>
             {session && (
                 <>
                     <Link href='/'>
@@ -67,10 +67,10 @@ function Sidebar() {
                                             People
                                         </div>
                                     </Link>
-                                    <Link href="/dashboard/reports">
-                                        <div className={` px-5 py-2 flex items-center gap-2 font-semibold text-lg rounded-xl  ${isActive('/dashboard/reports') ? 'bg-[#0C1A25] text-white' : 'text-gray-600'}`}>
-                                            <TbReportAnalytics />
-                                            Reports
+                                    <Link href="/dashboard/compliance">
+                                        <div className={` px-5 py-2 flex items-center gap-2 font-semibold text-lg rounded-xl  ${isActive('/dashboard/compliance') ? 'bg-[#0C1A25] text-white' : 'text-gray-600'}`}>
+                                            <GrCompliance />
+                                            Compliance
                                         </div>
                                     </Link>
                                     <Link href="/dashboard/payments">
@@ -90,12 +90,12 @@ function Sidebar() {
                         </div>
                     </div>
 
-                    <button className='border-[1px] border-gray-600 text-white py-3 flex items-center justify-between px-2 rounded-lg'>
+                    <button className='border-[1px] border-[#181920] text-white py-3 flex items-center justify-between px-2 rounded-lg'>
                         <div className="flex items-center justify-center gap-2">
                             <img className="w-10 rounded-full" src={session.user?.imgUrl} alt="" />
                             <h1 className="text-gray-300">{session.user?.name}</h1>
                         </div>
-                        <div onClick={handleLogout} className="border-[1px] rounded-xl p-2 border-gray-600">
+                        <div onClick={handleLogout} className="border-[1px] rounded-xl p-2 border-[#181920]">
                             <MdLogout color="gray" />
                         </div>
                     </button>

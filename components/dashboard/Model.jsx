@@ -12,7 +12,7 @@ const Model = ({ employee }) => {
             <AlertDialogTrigger className="bg-[#0C1A25] px-4 py-2 rounded-xl">Details</AlertDialogTrigger>
             <AlertDialogContent className='bg-[#0C1A25] border-none'>
                 <div className="flex items-center justify-center">
-                    <img className="w-32 rounded-full object-cover" src={employee?.imgUrl} alt="" />
+                    <img className="w-40 h-40 rounded-full object-cover" src={employee?.imgUrl} alt="" />
                 </div>
                 <div className="max-w-md p-6 text-white rounded-lg shadow-lg shadow-black">
                     <h1 className="text-2xl font-bold text-gray-200 mb-4">Employee Details</h1>
