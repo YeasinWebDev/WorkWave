@@ -7,6 +7,7 @@ export const POST = async (req, res) => {
     const db = await connectdb();
     const usercollection = db.collection("users");
     const paymentCollection = db.collection("payment");
+    const complianceCollection = db.collection("compliance")
 
     const userData = await usercollection
       .find({ companyCode: data.code })
@@ -38,12 +39,22 @@ export const POST = async (req, res) => {
     const nextpayrolldata = await usercollection.findOne({email:lastPayment.payment.email})
     const nextpayroll = nextpayrolldata.nextPayrollDate
 
-    console.log(nextpayroll)
+    // compliance data
+    const compliance = await complianceCollection.find().limit(5).toArray()
+
+     // recently joined user
+     const recentlyJoinedUser = await usercollection
+     .find({companyCode: data.code})
+     .sort({joiningDate: -1})
+     .limit(5)
+     .toArray();
 
     const ChartData = {
       CostPerDepertment,
       lastPayment,
-      nextpayroll
+      nextpayroll,
+      compliance,
+      recentlyJoinedUser
     };
 
     return new Response(JSON.stringify({ message: "Success", ChartData }));
