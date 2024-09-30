@@ -43,7 +43,7 @@ const page = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        setLoading(false);
+        setloading(false);
       }
     };
 
