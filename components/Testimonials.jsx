@@ -114,8 +114,7 @@ const Testimonials = () => {
           ease: 'power1.out',
           scrollTrigger: {
             trigger: img,
-            start: "top 80%",
-            end: "bottom 10%",
+            start: "top 90%",
 
             toggleActions: "play none none reverse",
           }
