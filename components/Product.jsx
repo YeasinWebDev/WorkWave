@@ -16,7 +16,7 @@ const Product = () => {
   },[])
   return (
     <div className='text-white flex items-center justify-center py-10 img'>
-      <img className='border-[1px] p-2 rounded-xl border-[#181920]' src="https://res.cloudinary.com/dlrktntvb/image/upload/v1727696161/Screenshot_2024-09-30_173244_rzfpwm.png" alt="" />
+      <img className='border-[1px] p-2 rounded-xl border-[#181920]' src="https://res.cloudinary.com/dlrktntvb/image/upload/v1727701470/Screenshot_2024-09-30_190304_kr1omi.png" alt="" />
     </div>
   )
 }

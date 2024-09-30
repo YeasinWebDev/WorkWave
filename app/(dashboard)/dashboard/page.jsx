@@ -28,21 +28,30 @@ const page = () => {
   const router = useRouter()
 
   useEffect(() => {
-    const res = async () => {
-      const data = await axios.post('/api/reports', { data: { code: session.user.companyCode, email: session.user.email } })
-      const res = data.data.ChartData
+    const fetchData = async () => {
+      try {
+        const response = await axios.post('/api/reports', {
+          data: { code: session.user.companyCode, email: session.user.email }
+        });
+        const resData = response.data.ChartData;
 
-      setReports(res.CostPerDepertment)
-      setPayroll(res.lastPayment)
-      setNextPayroll(res.nextpayroll)
-      setCompliance(res.compliance)
-      setUser(res.recentlyJoinedUser)
-      setloading(false);
-    }
+        setReports(resData.CostPerDepertment);
+        setPayroll(resData.lastPayment);
+        setNextPayroll(resData.nextpayroll);
+        setCompliance(resData.compliance);
+        setUser(resData.recentlyJoinedUser);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (session?.user?.companyCode) {
-      res()
+      fetchData();
     }
-  }, [session?.user?.companyCode])
+  }, [session?.user?.companyCode]);
+
 
   const totalSalaryallDepertements = reports?.reduce((acc, r) => acc + r.totalSalary, 0) || 0
 
