@@ -37,7 +37,7 @@ const SignIn = () => {
       password: password,
     });
 
-    setLoading(false); // Reset loading state
+    setLoading(false);
 
     if (res?.ok) {
       toast.success('Sign In Successfully');
@@ -48,13 +48,12 @@ const SignIn = () => {
     }
   };
 
-  console.log(session)
-  // Return loading state initially
+
   if (status === 'loading') {
     return <Loader/>
   }
 
-  if(session.user){
+  if(session?.user){
     return router.push('/')
   }
 
@@ -72,7 +71,7 @@ const SignIn = () => {
               placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              disabled={loading} // Disable input while loading
+              disabled={loading} 
             />
           </div>
 
@@ -84,14 +83,14 @@ const SignIn = () => {
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              disabled={loading} // Disable input while loading
+              disabled={loading} 
             />
           </div>
 
           <button
             type="submit"
             className={`w-full py-3 ${loading ? 'bg-gray-600' : 'bg-blue-600 hover:bg-blue-700'} hover:scale-95 duration-300 transition-all text-white font-bold rounded-md`}
-            disabled={loading} // Disable button while loading
+            disabled={loading} 
           >
             {loading ? 'Signing In...' : 'Sign In'}
           </button>
