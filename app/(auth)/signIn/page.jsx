@@ -48,9 +48,14 @@ const SignIn = () => {
     }
   };
 
+  console.log(session)
   // Return loading state initially
   if (status === 'loading') {
     return <Loader/>
+  }
+
+  if(session.user){
+    return router.push('/')
   }
 
   return (
@@ -63,7 +68,7 @@ const SignIn = () => {
             <label className="block text-sm font-medium text-gray-300">Email</label>
             <input
               type="email"
-              className="mt-1 block w-full p-3 rounded-md bg-gray-900 text-white focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-3 rounded-md bg-gray-900 text-white focus:px-6 focus:py-4 outline-none duration-300 transition-all"
               placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -75,7 +80,7 @@ const SignIn = () => {
             <label className="block text-sm font-medium text-gray-300">Password</label>
             <input
               type="password"
-              className="mt-1 block w-full p-3 rounded-md bg-gray-900 text-white focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full p-3 rounded-md bg-gray-900 text-white focus:px-6 focus:py-4 outline-none duration-300 transition-all"
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -85,7 +90,7 @@ const SignIn = () => {
 
           <button
             type="submit"
-            className={`w-full py-3 ${loading ? 'bg-gray-600' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold rounded-md`}
+            className={`w-full py-3 ${loading ? 'bg-gray-600' : 'bg-blue-600 hover:bg-blue-700'} hover:scale-95 duration-300 transition-all text-white font-bold rounded-md`}
             disabled={loading} // Disable button while loading
           >
             {loading ? 'Signing In...' : 'Sign In'}

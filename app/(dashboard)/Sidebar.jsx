@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { HiOutlineViewGrid } from 'react-icons/hi';
 import { IoMdPeople } from 'react-icons/io';
 import { GrCompliance } from "react-icons/gr";
+import { CgProfile } from "react-icons/cg";
 import { MdOutlinePayment, MdLogout } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Loader from "@/components/Loader";
@@ -77,6 +78,12 @@ function Sidebar() {
                                         <div className={` px-5 py-2 flex items-center gap-2 font-semibold text-lg rounded-xl  ${isActive('/dashboard/payments') ? 'bg-[#0C1A25] text-white' : 'text-gray-600'}`}>
                                             <MdOutlinePayment />
                                             Payments
+                                        </div>
+                                    </Link>
+                                    <Link href="/dashboard/profile">
+                                        <div className={` px-5 py-2 flex items-center gap-2 font-semibold text-lg rounded-xl  ${isActive('/dashboard/profile') ? 'bg-[#0C1A25] text-white' : 'text-gray-600'}`}>
+                                            <CgProfile />
+                                            Profile
                                         </div>
                                     </Link>
                                 </>

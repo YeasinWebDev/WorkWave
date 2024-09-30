@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useSession } from 'next-auth/react';
-import { checkoutOrder } from '@/app/checkoutorder/checkout';
+import { checkoutOrder } from '@/app/api/checkoutorder/checkout';
 import { isEqual, parseISO, isBefore } from 'date-fns';
 import FormatNumber from '@/components/FormatNumber';
 import Loader from '@/components/Loader';
