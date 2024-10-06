@@ -49,6 +49,7 @@ const page = () => {
     };
 
       fetchData();
+      window.location.reload()
   }, [session?.user]);
 
 
