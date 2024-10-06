@@ -29,7 +29,7 @@ password: 12345678
     git clone https://github.com/yourusername/work-wave.git
     cd work-wave
    ```
-2.Install dependencies:
+2. Install dependencies:
 
    ```bash
     npm install
