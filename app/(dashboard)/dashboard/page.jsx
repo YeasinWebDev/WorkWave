@@ -34,13 +34,13 @@ const page = () => {
         const response = await axios.post('/api/reports', {
           data: { code: session.user.companyCode, email: session.user.email }
         });
-        const resData = response.data.ChartData;
+        const resData = await response.data.ChartData;
 
-        setReports(resData.CostPerDepertment);
-        setPayroll(resData.lastPayment);
-        setNextPayroll(resData.nextpayroll);
-        setCompliance(resData.compliance);
-        setUser(resData.recentlyJoinedUser);
+        setReports(resData?.CostPerDepertment);
+        setPayroll(resData?.lastPayment);
+        setNextPayroll(resData?.nextpayroll);
+        setCompliance(resData?.compliance);
+        setUser(resData?.recentlyJoinedUser);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -49,8 +49,7 @@ const page = () => {
     };
 
       fetchData();
-      window.location.reload()
-  }, [session?.user]);
+  }, []);
 
 
   const totalSalaryallDepertements = reports?.reduce((acc, r) => acc + r.totalSalary, 0) || 0
