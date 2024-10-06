@@ -19,7 +19,7 @@ const Page = () => {
         location: user?.location || '',
         contact: user?.contact || '',
         salary: user?.salary || '',
-    } | user);
+    } | '');
 
     // Handle input changes
     const handleInputChange = (e) => {
@@ -28,9 +28,7 @@ const Page = () => {
     };
 
     useEffect(() => {
-        if (user) {
             setFormData(user)
-        }
     }, [user])
 
     // Handle form submit (to be integrated with API)

@@ -47,10 +47,7 @@ const page = () => {
         setloading(false);
       }
     };
-
-    if (session?.user) {
       fetchData();
-    }
   }, [session?.user]);
 
 
