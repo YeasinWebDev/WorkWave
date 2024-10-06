@@ -1,4 +1,4 @@
-# Work Wave – HR and Payroll Management System || [Live].(https://work-wave-omega.vercel.app)
+# Work Wave – HR and Payroll Management System || [Live](https://work-wave-omega.vercel.app/)
 
 Email: yeasindev8@gmail.com <br/>
 password: 12345678
