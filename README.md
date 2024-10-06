@@ -31,22 +31,22 @@ password: 12345678
    ```
 2.Install dependencies:
 
-  ```bash
-   npm install
-  ```
+   ```bash
+    npm install
+   ```
 3. Set up environment variables: Create a `.env.local` file in the root directory and add the following:
 
-  ```bash
-  MONGODB_URI=<your-mongo-db-connection-string>
-  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<your-stripe-publishable-key>
-  STRIPE_SECRET_KEY=<your-stripe-secret-key>
-  ```
+   ```bash
+    MONGODB_URI=<your-mongo-db-connection-string>
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=<your-stripe-publishable-key>
+    STRIPE_SECRET_KEY=<your-stripe-secret-key>
+   ```
 
 4. Run the development server:
 
-   ```bash
-   npm run dev
-   ```
+    ```bash
+     npm run dev
+    ```
 
 ## Future Enhancements
 1. **Employee Invitation System**: Allow HR to send signup invitations to employees.
