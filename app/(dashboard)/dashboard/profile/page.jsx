@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import Loader from '@/components/Loader';
 
 const Page = () => {
-    const { data: session,status } = useSession()
+    const { data: session, status } = useSession()
     const user = session?.user
 
     const [formData, setFormData] = useState({
@@ -28,28 +28,26 @@ const Page = () => {
     };
 
     useEffect(() => {
-        if (user) {
-            setFormData(user)
-        }
+        setFormData(user)
     }, [user])
 
     // Handle form submit (to be integrated with API)
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Logic to update profile data via API
         const profileresult = await axios.post('/api/updateProfile', formData)
-        if(profileresult.status === 200) {
+        if (profileresult.status === 200) {
             toast.success("Profile updated successfully")
             window.location.reload()
-        }else{
+        } else {
             toast.error("Failed to update profile")
         }
 
         console.log(formData);
     };
 
-    if(status ==='loading'){
-        return <Loader/>
+    if (status === 'loading') {
+        return <Loader />
     }
 
     return (

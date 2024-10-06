@@ -18,7 +18,7 @@ import { FcLowPriority } from "react-icons/fc";
 import { FcMediumPriority } from "react-icons/fc";
 
 const page = () => {
-  const { data: session } = useSession()
+  const { data: session,status } = useSession()
   const [reports, setReports] = useState(null)
   const [payroll, setPayroll] = useState(null)
   const [compliance, setCompliance] = useState(null)
@@ -48,9 +48,7 @@ const page = () => {
       }
     };
 
-    if (session?.user) {
       fetchData();
-    }
   }, [session?.user]);
 
 
@@ -63,6 +61,10 @@ const page = () => {
     Sales: '#BDB4FD',
     Marketing: '#EFABFD'
   }
+
+  if (status === "loading") {
+    return <Loader/>
+}
 
 
   return loading ? <Loader /> : (
