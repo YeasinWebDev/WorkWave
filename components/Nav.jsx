@@ -54,7 +54,7 @@ const Nav = () => {
                 {/* Hamburger Menu for Mobile */}
                 <div className="xl:hidden z-10 w-full flex justify-end">
                     <button onClick={toggleMenu} className="text-white focus:outline-none ">
-                        <div className="btn btn-circle bg-transparent border-none text-white">
+                        <div className="btn btn-circle bg-transparent border-none text-white hover:bg-transparent">
                             {/* Show Hamburger icon when menu is closed */}
                             {!isOpen && (
                                 <svg

@@ -47,8 +47,10 @@ const page = () => {
     }
   };
   useEffect(() => {
+    if (status === "authenticated") {
       fetchData();
-  }, [session?.user]);
+    }
+  }, [session?.user,status]);
 
 
   const totalSalaryallDepertements = reports?.reduce((acc, r) => acc + r.totalSalary, 0) || 0
@@ -63,6 +65,10 @@ const page = () => {
 
   if (status === "loading") {
     return <Loader />
+  }
+  if (status === "unauthenticated") {
+    router.push('/login'); 
+    return null;
   }
 
 
