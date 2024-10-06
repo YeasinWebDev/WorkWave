@@ -48,10 +48,10 @@ const page = () => {
       }
     };
 
-    if (session?.user?.companyCode) {
+    if (session?.user) {
       fetchData();
     }
-  }, [session?.user?.companyCode]);
+  }, [session?.user]);
 
 
   const totalSalaryallDepertements = reports?.reduce((acc, r) => acc + r.totalSalary, 0) || 0
