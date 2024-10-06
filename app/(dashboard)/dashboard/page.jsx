@@ -27,26 +27,26 @@ const page = () => {
   const [loading, setloading] = useState(false)
   const router = useRouter()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setloading(true);
-        const response = await axios.post('/api/reports', {
-          data: { code: session.user.companyCode, email: session.user.email }
-        });
-        const resData = await response.data.ChartData;
+  const fetchData = async () => {
+    try {
+      setloading(true);
+      const response = await axios.post('/api/reports', {
+        data: { code: session.user.companyCode, email: session.user.email }
+      });
+      const resData = await response.data.ChartData;
 
-        setReports(resData?.CostPerDepertment);
-        setPayroll(resData?.lastPayment);
-        setNextPayroll(resData?.nextpayroll);
-        setCompliance(resData?.compliance);
-        setUser(resData?.recentlyJoinedUser);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setloading(false);
-      }
-    };
+      setReports(resData?.CostPerDepertment);
+      setPayroll(resData?.lastPayment);
+      setNextPayroll(resData?.nextpayroll);
+      setCompliance(resData?.compliance);
+      setUser(resData?.recentlyJoinedUser);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setloading(false);
+    }
+  };
+  useEffect(() => {
       fetchData();
   }, [session?.user]);
 

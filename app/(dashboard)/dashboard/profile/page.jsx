@@ -28,7 +28,9 @@ const Page = () => {
     };
 
     useEffect(() => {
+        if(user){
             setFormData(user)
+        }
     }, [user])
 
     // Handle form submit (to be integrated with API)
@@ -42,8 +44,6 @@ const Page = () => {
         }else{
             toast.error("Failed to update profile")
         }
-
-        console.log(formData);
     };
 
     if(status ==='loading'){

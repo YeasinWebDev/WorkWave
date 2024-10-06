@@ -16,21 +16,21 @@ const page = () => {
   const [reload, setreload] = useState(false)
   const { data: session } = useSession()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (session?.user?.companyCode) {
-        try {
-          const res = await axios.post('/api/compliance', { code: session?.user?.companyCode });
-          setData(res.data);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      } else {
+  const fetchData = async () => {
+    if (session?.user?.companyCode) {
+      try {
+        const res = await axios.post('/api/compliance', { code: session?.user?.companyCode });
+        setData(res.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
         setLoading(false);
       }
-    };
+    } else {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, [session, reload]);
 
