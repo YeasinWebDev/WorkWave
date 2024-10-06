@@ -24,12 +24,13 @@ const page = () => {
   const [compliance, setCompliance] = useState(null)
   const [user, setUser] = useState(null)
   const [nextpayroll, setNextPayroll] = useState(null)
-  const [loading, setloading] = useState(true)
+  const [loading, setloading] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setloading(true);
         const response = await axios.post('/api/reports', {
           data: { code: session.user.companyCode, email: session.user.email }
         });
