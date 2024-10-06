@@ -18,7 +18,7 @@ import { FcLowPriority } from "react-icons/fc";
 import { FcMediumPriority } from "react-icons/fc";
 
 const page = () => {
-  const { data: session,status } = useSession()
+  const { data: session, status } = useSession()
   const [reports, setReports] = useState(null)
   const [payroll, setPayroll] = useState(null)
   const [compliance, setCompliance] = useState(null)
@@ -48,8 +48,10 @@ const page = () => {
       }
     };
 
+    if (session?.user) {
       fetchData();
-  }, []);
+    }
+  }, [session?.user]);
 
 
   const totalSalaryallDepertements = reports?.reduce((acc, r) => acc + r.totalSalary, 0) || 0
@@ -63,8 +65,8 @@ const page = () => {
   }
 
   if (status === "loading") {
-    return <Loader/>
-}
+    return <Loader />
+  }
 
 
   return loading ? <Loader /> : (
