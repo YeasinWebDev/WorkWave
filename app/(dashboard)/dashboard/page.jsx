@@ -121,9 +121,9 @@ const page = () => {
             <div className='flex flex-col gap-2 items-start'>
               {
                 user?.map((u) => (
-                  <div key={u?._id} className={`flex gap-3 items-center justify-between w-full ${u !== user[user.length - 1] ? "border-b-[1px]" : 'border-b-0'} border-[#181920] pb-1`}>
+                  <div key={u?._id} className={`flex gap-3 items-center justify-between w-full ${u !== user[user?.length - 1] ? "border-b-[1px]" : 'border-b-0'} border-[#181920] pb-1`}>
                     <div className='flex items-center gap-3'>
-                      <img className='w-10 h-10 rounded-full object-cover' src={u.imgUrl} alt="" />
+                      <img className='w-10 h-10 rounded-full object-cover' src={u?.imgUrl} alt="" />
                       <div>
                         <h3 className='text-lg'>{u?.name}</h3>
                         <p className='text-gray-500'>{u?.employType}</p>
