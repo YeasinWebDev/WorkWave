@@ -63,7 +63,7 @@ const page = () => {
     Marketing: '#EFABFD'
   }
 
-  if (status === "loading") {
+  if (loading || status === "loading") {
     return <Loader />
   }
   if (status === "unauthenticated") {
@@ -84,12 +84,12 @@ const page = () => {
             <div className='flex gap-2 flex-col pt-2'>
               {
                 reports?.map((r) => {
-                  const percentage = totalSalaryallDepertements ? (r.totalSalary / totalSalaryallDepertements) * 100 : 0
+                  const percentage = totalSalaryallDepertements ? (r?.totalSalary / totalSalaryallDepertements) * 100 : 0
 
-                  const departmentColor = departmentColors[r.employType] || '#ccc';
+                  const departmentColor = departmentColors[r?.employType] || '#ccc';
 
                   return (
-                    <div className='relative bg-[#181920] p-1 rounded-md text-black font-semibold' key={r.employType}>
+                    <div className='relative bg-[#181920] p-1 rounded-md text-black font-semibold' key={r?.employType}>
                       {/* Bar as background based on department */}
                       <div
                         className="absolute inset-0 rounded-lg"
@@ -101,8 +101,8 @@ const page = () => {
                         }}
                       />
                       <div className="relative flex justify-between items-center z-10 p-1">
-                        <h3>{r.employType}</h3>
-                        <p className='text-white'><FormatNumber num={r.totalSalary} /></p>
+                        <h3>{r?.employType}</h3>
+                        <p className='text-white'><FormatNumber num={r?.totalSalary} /></p>
                       </div>
                     </div>
                   )
@@ -121,17 +121,17 @@ const page = () => {
             <div className='flex flex-col gap-2 items-start'>
               {
                 user?.map((u) => (
-                  <div key={u._id} className={`flex gap-3 items-center justify-between w-full ${u !== user[user.length - 1] ? "border-b-[1px]" : 'border-b-0'} border-[#181920] pb-1`}>
+                  <div key={u?._id} className={`flex gap-3 items-center justify-between w-full ${u !== user[user.length - 1] ? "border-b-[1px]" : 'border-b-0'} border-[#181920] pb-1`}>
                     <div className='flex items-center gap-3'>
                       <img className='w-10 h-10 rounded-full object-cover' src={u.imgUrl} alt="" />
                       <div>
-                        <h3 className='text-lg'>{u.name}</h3>
-                        <p className='text-gray-500'>{u.employType}</p>
+                        <h3 className='text-lg'>{u?.name}</h3>
+                        <p className='text-gray-500'>{u?.employType}</p>
                       </div>
                     </div>
                     <div>
                       <h6>Joining Date</h6>
-                      <h6 className='text-gray-500'>{u.joiningDate}</h6>
+                      <h6 className='text-gray-500'>{u?.joiningDate}</h6>
                     </div>
                   </div>
                 ))
@@ -174,20 +174,20 @@ const page = () => {
 
             {
               compliance?.map((compliance) => (
-                <div key={compliance._id} className='flex gap-4 items-center justify-start py-3'>
-                  <div className={`p-2 rounded-full ${compliance.category === 'Labor Laws' ? 'bg-orange-200' : compliance.category === 'Data Protection' ? 'bg-blue-200' : compliance.category === 'Health & Safety' ? 'bg-orange-200' : compliance.category === 'Health Insurance' ? 'bg-green-200' : 'bg-orange-200'}`}>
-                    {compliance.category === 'Labor Laws' ? <IoMdPeople className='text-orange-900' size={25} />
-                      : compliance.category === 'Data Protection' ? <MdSignalWifi2BarLock className='text-blue-900' size={25} />
-                        : compliance.category === 'Health & Safety' ? <MdHealthAndSafety className='text-orange-900' size={25} />
-                          : compliance.category === 'Health Insurance' ? <RiMentalHealthFill className='text-orange-900' size={25} />
+                <div key={compliance?._id} className='flex gap-4 items-center justify-start py-3'>
+                  <div className={`p-2 rounded-full ${compliance?.category === 'Labor Laws' ? 'bg-orange-200' : compliance?.category === 'Data Protection' ? 'bg-blue-200' : compliance?.category === 'Health & Safety' ? 'bg-orange-200' : compliance?.category === 'Health Insurance' ? 'bg-green-200' : 'bg-orange-200'}`}>
+                    {compliance?.category === 'Labor Laws' ? <IoMdPeople className='text-orange-900' size={25} />
+                      : compliance?.category === 'Data Protection' ? <MdSignalWifi2BarLock className='text-blue-900' size={25} />
+                        : compliance?.category === 'Health & Safety' ? <MdHealthAndSafety className='text-orange-900' size={25} />
+                          : compliance?.category === 'Health Insurance' ? <RiMentalHealthFill className='text-orange-900' size={25} />
                             : <BsPersonWorkspace className='text-green-900' size={25} />
                     }
                   </div>
                   <div className='border-b-[1px] border-[#181920] w-full pb-2'>
-                    <h2 className="text-lg font-semibold text-gray-100">{compliance.title}</h2>
+                    <h2 className="text-lg font-semibold text-gray-100">{compliance?.title}</h2>
                     <div className='flex items-center justify-start gap-2'>
-                      <h6 className='text-[14px] flex items-center gap-2 text-gray-300'>{compliance.priority === "High" ? <FcHighPriority size={23} /> : compliance.priority === 'Medium' ? <FcMediumPriority size={23} /> : <FcLowPriority size={23} />} <span className='border-[1px] p-1 border-[#181920] rounded-lg'>{compliance.priority}</span></h6>
-                      <p className='text-[12px] text-gray-500'>Due Date: {new Date(compliance.dueDate).toLocaleDateString()}</p>
+                      <h6 className='text-[14px] flex items-center gap-2 text-gray-300'>{compliance?.priority === "High" ? <FcHighPriority size={23} /> : compliance?.priority === 'Medium' ? <FcMediumPriority size={23} /> : <FcLowPriority size={23} />} <span className='border-[1px] p-1 border-[#181920] rounded-lg'>{compliance?.priority}</span></h6>
+                      <p className='text-[12px] text-gray-500'>Due Date: {new Date(compliance?.dueDate).toLocaleDateString()}</p>
                     </div>
                   </div>
                 </div>
