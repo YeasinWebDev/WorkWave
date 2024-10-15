@@ -10,16 +10,17 @@ import Loader from '@/components/Loader';
 const Page = () => {
     const { data: session,status } = useSession()
     const user = session?.user
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
-        name: user?.name || '',
-        email: user?.email || '',
-        companyName: user?.companyName || '',
-        employType: user?.employType || '',
-        location: user?.location || '',
-        contact: user?.contact || '',
-        salary: user?.salary || '',
-    } | '');
+        name: '',
+        email: '',
+        companyName: '',
+        employType: '',
+        location: '',
+        contact: '',
+        salary: '',
+    });
 
     // Handle input changes
     const handleInputChange = (e) => {
@@ -29,20 +30,34 @@ const Page = () => {
 
     useEffect(() => {
         if(user){
-            setFormData(user)
+            setFormData({
+                name: user.name || '',
+                email: user.email || '',
+                companyName: user.companyName || '',
+                employType: user.employType || '',
+                location: user.location || '',
+                contact: user.contact || '',
+                salary: user.salary || '',
+            });
         }
     }, [user])
 
     // Handle form submit (to be integrated with API)
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Logic to update profile data via API
-        const profileresult = await axios.post('/api/updateProfile', formData)
-        if(profileresult.status === 200) {
-            toast.success("Profile updated successfully")
-            window.location.reload()
-        }else{
-            toast.error("Failed to update profile")
+        setLoading(true); 
+        try {
+            const profileresult = await axios.post('/api/updateProfile', formData);
+            setLoading(false);
+            if (profileresult.status === 200) {
+                toast.success("Profile updated successfully");
+                window.location.reload();
+            } else {
+                toast.error("Failed to update profile");
+            }
+        } catch (error) {
+            setLoading(false);
+            toast.error("Failed to update profile");
         }
     };
 
@@ -96,7 +111,7 @@ const Page = () => {
                         </div>
                         <div>
                             <h2 className="text-lg font-medium">Salary:</h2>
-                            <p className="font-semibold text-red-500">{user?.salary ? `${user.salary} Tk` : "N/A"}</p>
+                            <p className="font-semibold text-red-500">{user?.salary ? `${user?.salary} Tk` : "N/A"}</p>
                         </div>
                     </div>
                 </div>
