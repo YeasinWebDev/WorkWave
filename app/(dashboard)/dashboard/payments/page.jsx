@@ -22,22 +22,22 @@ const Payments = () => {
     const fetchPayrolls = async () => {
       try {
         const response = await axios.get('/api/employee/allemployee');
-        let payrollData = response.data
+        let payrollData = response?.data
 
         // update status
         const currentDate = new Date()
 
         const updatedpayroll = await Promise.all(
-          payrollData.map(async (payroll) => {
-            const payrollDate = parseISO(payroll.nextPayrollDate)
+          payrollData?.map(async (payroll) => {
+            const payrollDate = parseISO(payroll?.nextPayrollDate)
 
             if ((isBefore(payrollDate, currentDate) || isEqual(payrollDate, currentDate)) && payroll.status === 'complete') {
               console.log('inside')
               await axios.post('/api/employee/updatePayrollStatus', {
-                email: payroll.email,
+                email: payroll?.email,
                 status: 'pending'
               })
-              payroll.status = 'Pending';
+              payroll?.status = 'Pending';
             }
 
             return payroll
@@ -59,11 +59,11 @@ const Payments = () => {
     try {
       const payment = {
         paymentBy: session?.user?.email,
-        name: payroll.name,
-        email: payroll.email,
-        img: payroll.imgUrl,
-        salary: payroll.salary,
-        payrollDate: payroll.nextPayrollDate
+        name: payroll?.name,
+        email: payroll?.email,
+        img: payroll?.imgUrl,
+        salary: payroll?.salary,
+        payrollDate: payroll?.nextPayrollDate
       }
       checkoutOrder(payment)
     } catch (err) {
@@ -74,11 +74,10 @@ const Payments = () => {
   if (loading) return <Loader/>;
   if (error) return <div className="text-red-500">{error}</div>;
 
-  const totalPayroll = payrolls.reduce((a, r) => (a + r.salary), 0)
-  const duePayroll = payrolls.filter(e => e.status === 'Pending').reduce((a, r) => (a + r.salary), 0)
-  console.log(payrolls)
+  const totalPayroll = payrolls?.reduce((a, r) => (a + r.salary), 0)
+  const duePayroll = payrolls?.filter(e => e.status === 'Pending').reduce((a, r) => (a + r.salary), 0)
 
-  const filterdate = employ ? payrolls.filter(e => e.employType  === employ)  : status ? payrolls.filter(e => e.status  === status) : payrolls
+  const filterdate = employ ? payrolls?.filter(e => e.employType  === employ)  : status ? payrolls?.filter(e => e.status  === status) : payrolls
 
   return (
     <div className=" py-20 flex items-center flex-col rounded-xl gap-3">
@@ -135,20 +134,20 @@ const Payments = () => {
             </tr>
           </thead>
           <tbody>
-            {filterdate.map((payroll, i) => (
+            {filterdate?.map((payroll, i) => (
               <tr key={i} className='text-lg text-gray-400'>
                 <td>{i + 1}</td>
-                <td>{payroll.email}</td>
-                <td>{payroll.salary}</td>
+                <td>{payroll?.email}</td>
+                <td>{payroll?.salary}</td>
                 <td className={` ${payroll.status === 'Pending' ? 'text-yellow-500' : 'text-green-500'}`}>
-                  {payroll.status}
+                  {payroll?.status}
                 </td>
-                <td>{payroll.nextPayrollDate}</td>
+                <td>{payroll?.nextPayrollDate}</td>
                 <td>
                   <button
                     onClick={() => handleProcessPayroll(payroll)}
-                    disabled={payroll.status !== 'Pending'}
-                    className={`py-1 px-3 rounded ${payroll.status === 'Pending'
+                    disabled={payroll?.status !== 'Pending'}
+                    className={`py-1 px-3 rounded ${payroll?.status === 'Pending'
                       ? 'bg-blue-500 text-white' : 'bg-gray-600 text-gray-400'}`}
                   >
                     Process Payroll
