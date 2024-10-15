@@ -31,7 +31,7 @@ const People = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setSortType('')
-    const filtered = employee.filter((e) =>
+    const filtered = employee?.filter((e) =>
       e.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
     setFilteredEmployee(filtered);
@@ -44,7 +44,7 @@ const People = () => {
     if (sortBy === '') {
       setFilteredEmployee(employee);
     }else{
-      const filterdata = employee.filter(e => e.employType === sortBy)
+      const filterdata = employee?.filter(e => e.employType === sortBy)
       setFilteredEmployee(filterdata);
     }
   };
@@ -70,7 +70,7 @@ const People = () => {
             className="select select-bordered w-full max-w-xs bg-transparent"
           >
             <option value="" className='bg-black text-white'>Sort by Depertment</option>
-            {employTypeOrder.map((e,i)=>(<option key={i} value={e} className='bg-black text-white'>{e}</option>))}
+            {employTypeOrder?.map((e,i)=>(<option key={i} value={e} className='bg-black text-white'>{e}</option>))}
           </select>
         </div>
 
@@ -92,20 +92,20 @@ const People = () => {
                 </thead>
                 <tbody>
                   {/* Table Body */}
-                  {filteredEmployee.map((e, i) => (
-                    <tr key={e._id} className="text-lg text-gray-400">
+                  {filteredEmployee?.map((e, i) => (
+                    <tr key={e?._id} className="text-lg text-gray-400">
                       <td>{i + 1}</td>
                       <td>
                         <img
-                          src={e.imgUrl}
-                          alt={e.name}
+                          src={e?.imgUrl}
+                          alt={e?.name}
                           className="rounded-full object-cover w-12 h-12"
                         />
                       </td>
-                      <td>{e.name}</td>
-                      <td>{e.email}</td>
-                      <td>{e.employType}</td>
-                      <td>{e.salary}</td>
+                      <td>{e?.name}</td>
+                      <td>{e?.email}</td>
+                      <td>{e?.employType}</td>
+                      <td>{e?.salary}</td>
                       <td>
                         <Model employee={e} />
                       </td>
