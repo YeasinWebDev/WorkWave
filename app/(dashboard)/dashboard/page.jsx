@@ -69,7 +69,7 @@ const page = () => {
   }
 
 
-  return loading ? <Loader /> : (
+  return (
     <div>
       <div className='flex items-center justify-center font-semibold text-2xl pt-5'><h1 className='px-6 py-3 rounded-2xl w-fit bg-[#0C1A25]'>{session?.user?.companyName}</h1></div>
 
