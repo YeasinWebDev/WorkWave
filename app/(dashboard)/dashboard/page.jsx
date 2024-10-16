@@ -31,7 +31,7 @@ const page = () => {
     try {
       setloading(true);
       const response = await axios.post('/api/reports', {
-        data: { code: session.user.companyCode, email: session.user.email }
+        data: { code: session?.user.companyCode, email: session?.user.email }
       });
       const resData = await response.data.ChartData;
 
@@ -47,11 +47,10 @@ const page = () => {
     }
   };
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status === "authenticated" && session?.user) {
       fetchData();
     }
-    window.location.reload();
-  }, [session?.user,status]);
+  }, [session,status]);
 
 
 
