@@ -18,7 +18,7 @@ const SignIn = () => {
     if (status === 'authenticated') {
       router.push('/');
     }
-  }, [status, router]);
+  }, [status]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,10 +51,6 @@ const SignIn = () => {
 
   if (status === 'loading') {
     return <Loader/>
-  }
-
-  if(session?.user){
-    return router.push('/')
   }
 
   return (
