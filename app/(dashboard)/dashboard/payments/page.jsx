@@ -32,12 +32,11 @@ const Payments = () => {
             const payrollDate = parseISO(payroll.nextPayrollDate)
 
             if ((isBefore(payrollDate, currentDate) || isEqual(payrollDate, currentDate)) && payroll.status === 'complete') {
-              console.log('inside')
               await axios.post('/api/employee/updatePayrollStatus', {
                 email: payroll?.email,
                 status: 'pending'
               })
-              payroll?.status = 'Pending';
+              payroll.status = 'Pending';
             }
 
             return payroll
