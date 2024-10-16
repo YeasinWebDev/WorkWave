@@ -29,7 +29,7 @@ const Payments = () => {
 
         const updatedpayroll = await Promise.all(
           payrollData?.map(async (payroll) => {
-            const payrollDate = parseISO(payroll?.nextPayrollDate)
+            const payrollDate = parseISO(payroll.nextPayrollDate)
 
             if ((isBefore(payrollDate, currentDate) || isEqual(payrollDate, currentDate)) && payroll.status === 'complete') {
               console.log('inside')
@@ -59,11 +59,11 @@ const Payments = () => {
     try {
       const payment = {
         paymentBy: session?.user?.email,
-        name: payroll?.name,
-        email: payroll?.email,
-        img: payroll?.imgUrl,
-        salary: payroll?.salary,
-        payrollDate: payroll?.nextPayrollDate
+        name: payroll.name,
+        email: payroll.email,
+        img: payroll.imgUrl,
+        salary: payroll.salary,
+        payrollDate: payroll.nextPayrollDate
       }
       checkoutOrder(payment)
     } catch (err) {
