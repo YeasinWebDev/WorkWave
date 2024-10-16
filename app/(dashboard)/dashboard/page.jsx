@@ -66,10 +66,6 @@ const page = () => {
   if (loading || status === "loading") {
     return <Loader />
   }
-  if (status === "unauthenticated") {
-    router.push('/signIn'); 
-    return null;
-  }
 
 
   return loading ? <Loader /> : (

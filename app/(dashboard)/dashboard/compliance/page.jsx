@@ -54,7 +54,7 @@ const page = () => {
         <FiPlus size={28} color='gray' />
       </div>
       <div className="flex flex-wrap justify-center gap-6 pt-20">
-        {data ? data.map((compliance, index) => (
+        {data ? data?.map((compliance, index) => (
           <ComplianceCard key={index} compliance={compliance} setreload={setreload} />
         )) : <h1>No Data found</h1>}
       </div>
