@@ -52,6 +52,10 @@ const page = () => {
     }
   }, [session?.user,status]);
 
+  useEffect(() =>{
+    window.location.reload();
+  },[])
+
 
   const totalSalaryallDepertements = reports?.reduce((acc, r) => acc + r.totalSalary, 0) || 0
 
